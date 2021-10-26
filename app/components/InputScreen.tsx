@@ -21,29 +21,29 @@ function InputScreen(props:any) {
       <TextInput
         style={styles.input}
         placeholder="Enter your name"
-        onChangeText={(text) => useInputState(text)}
-        value={name}
+        onChangeText={(name) => useInputState({...inputState, name})}
+        value={inputState.name}
       />
 
       <TextInput
         style={styles.input}
         keyboardType="numeric"
         placeholder="Enter your phone number"
-        onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
-        value={phoneNumber}
+        onChangeText={(phoneNumber) => useInputState({...inputState, phoneNumber})}
+        value={inputState.phoneNumber}
       />
       <TextInput
         style={styles.input}
         keyboardType="numeric"
         placeholder="Enter your age"
-        onChangeText={(age) => setAge(age)}
-        value={age}
+        onChangeText={(age) => useInputState({...inputState, age})}
+        value={inputState.age}
       />
       <Button title="Submit" onPress={() =>{
-      props.navigation.navigate({name:"DisplayScreen", params:{name, phoneNumber, age}} )
-      setName("")
-      setPhoneNumber("")
-      setAge("")
+      props.navigation.navigate("DisplayScreen")
+      // setName("")
+      // setPhoneNumber("")
+      // setAge("")
       }
       }/>
       {/* <ModalDropdown 
