@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { useRecoilValue } from "recoil";
 import { useGlobalState } from '../store';
 
-function DisplayScreen(props:any) {
+function DisplayScreen({props:{}}) {
     // const { name, phoneNumber, age } = props.route.params
     const  inputState = useRecoilValue(useGlobalState)
 

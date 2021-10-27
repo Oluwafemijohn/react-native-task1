@@ -8,6 +8,7 @@ import {  useGlobalState } from "../store/index"
 function InputScreen(props:any) {
 
   const [ inputState, useInputState ] = useRecoilState(useGlobalState)
+  const [localInputState, useLocalInputState] = useState(inputState)
 
   // const [name, setName] = useState("");
   // const [phoneNumber, setPhoneNumber] = useState("");
@@ -21,36 +22,43 @@ function InputScreen(props:any) {
       <TextInput
         style={styles.input}
         placeholder="Enter your name"
-        onChangeText={(name) => useInputState({...inputState, name})}
-        value={inputState.name}
+        onChangeText={(name) => {
+          useInputState({...inputState, name})
+          useLocalInputState({...localInputState, name})
+
+        }}
+        value={localInputState.name}
       />
 
       <TextInput
         style={styles.input}
         keyboardType="numeric"
         placeholder="Enter your phone number"
-        onChangeText={(phoneNumber) => useInputState({...inputState, phoneNumber})}
-        value={inputState.phoneNumber}
+        onChangeText={(phoneNumber) =>{ 
+          useInputState({...inputState, phoneNumber})
+          useLocalInputState({...localInputState, phoneNumber})
+        }}
+        value={localInputState.phoneNumber}
       />
       <TextInput
         style={styles.input}
         keyboardType="numeric"
         placeholder="Enter your age"
-        onChangeText={(age) => useInputState({...inputState, age})}
-        value={inputState.age}
+        onChangeText={(age) =>{ useInputState({...inputState, age})
+        useLocalInputState({...localInputState, age})
+      }}
+        value={localInputState.age}
       />
       <Button title="Submit" onPress={() =>{
       props.navigation.navigate("DisplayScreen")
-      // setName("")
-      // setPhoneNumber("")
-      // setAge("")
+      useLocalInputState({name:"", phoneNumber:"", age:""})
       }
       }/>
-      {/* <ModalDropdown 
-
+      <ModalDropdown 
+      showsVerticalScrollIndicator
       style={styles.dropdown}
       textStyle={{ color:"black"}}
-      options={["Male", "Female"]} /> */}
+      options={["Male", "Female"]} />
     </SafeAreaView>
   );
 }
