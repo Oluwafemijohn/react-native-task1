@@ -10,15 +10,11 @@ function InputScreen(props:any) {
   const [ inputState, useInputState ] = useRecoilState(useGlobalState)
   const [localInputState, useLocalInputState] = useState(inputState)
 
-  // const [name, setName] = useState("");
-  // const [phoneNumber, setPhoneNumber] = useState("");
-  // const [age, setAge] = useState("");
-
   const onChangeText = (text: string) => {
   
   };
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container} >
       <TextInput
         style={styles.input}
         placeholder="Enter your name"
@@ -44,12 +40,14 @@ function InputScreen(props:any) {
         style={styles.input}
         keyboardType="numeric"
         placeholder="Enter your age"
-        onChangeText={(age) =>{ useInputState({...inputState, age})
+        onChangeText={(age) =>{ 
+          useInputState({...inputState, age})
         useLocalInputState({...localInputState, age})
       }}
         value={localInputState.age}
       />
       <Button title="Submit" onPress={() =>{
+        console.log(inputState.name)
       props.navigation.navigate("DisplayScreen")
       useLocalInputState({name:"", phoneNumber:"", age:""})
       }
@@ -64,11 +62,16 @@ function InputScreen(props:any) {
 }
 
 const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+    backgroundColor: "#0000"
+  },
   input: {
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    backgroundColor: "white"
   },
   dropdown:{
     width: 100
